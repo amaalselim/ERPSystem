@@ -10,4 +10,10 @@
     <ProjectReference Include="..\ERP.Dtos\ERP.Dtos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+    <Folder Include="Constants\" />
+    <Folder Include="Enums\" />
+  </ItemGroup>
+
 </Project>
