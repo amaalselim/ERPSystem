@@ -10,4 +10,10 @@
     <ProjectReference Include="..\ERP.Application\ERP.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="UnitOfWork\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
