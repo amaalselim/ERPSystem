@@ -1,5 +1,8 @@
+using ERP.Web.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.InjectionServices(builder); // Extension method for Dependency Injection
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
