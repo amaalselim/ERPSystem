@@ -18,8 +18,9 @@ namespace ERP.Application.IServices
 
         Task<bool> ExistAsync(Expression<Func<T, bool>> match);
 
-        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> match);
-        Task<IQueryable<T>> GetAllQueryable(Expression<Func<T, bool>> match);
+        Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> match); // بتفلتر في الكود عندي بترجع كل الداتا وبعدين تفلتر
+        Task<IQueryable<T>> GetAllQueryable(Expression<Func<T, bool>> match); //مش بتجيب كل الداتا كلها بتفلتر ع مستوى الداتا بيز وتيجي بالنتيجة
+
         Task<int> CountAsync(Expression<Func<T, bool>> match);
 
         IQueryable<T> GetSelectedQueryable(Expression<Func<T, bool>> match, Expression<Func<T, T>> Selector);
