@@ -1,14 +1,7 @@
 namespace ERP.Web.Controllers;
 
-public class HomeController : Controller
+public class HomeController(ILogger<HomeController> _logger) : Controller  //we didn't have to use Constructor Injection here, we could have used Property Injection or Method Injection as well.
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
-
     public IActionResult Index()
     {
         return View();
