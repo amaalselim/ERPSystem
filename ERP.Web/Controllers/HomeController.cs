@@ -1,6 +1,3 @@
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using ERP.Web.Models;
 
 namespace ERP.Web.Controllers;
 
