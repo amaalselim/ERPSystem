@@ -1,4 +1,3 @@
-
 namespace ERP.Web.Controllers;
 
 public class HomeController : Controller
