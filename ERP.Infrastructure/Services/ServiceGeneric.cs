@@ -1,8 +1,4 @@
-﻿using ERP.Application.IServices;
-using ERP.Infrastructure.Data;
-using System.Linq.Expressions;
-
-namespace ERP.Infrastructure.Services
+﻿namespace ERP.Infrastructure.Services
 {
     public class ServiceGeneric<T>(ApplicationDbContext _context) : IServices<T> where T : class
     {

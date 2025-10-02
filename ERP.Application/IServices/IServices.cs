@@ -1,5 +1,4 @@
-﻿
-namespace ERP.Application.IServices
+﻿namespace ERP.Application.IServices
 {
     public interface IServices<T> where T : class
     {
