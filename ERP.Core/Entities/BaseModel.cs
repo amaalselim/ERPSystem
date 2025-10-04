@@ -121,6 +121,7 @@ namespace ERP.Domain.Entities
         public int BrandId { get; set; }
         [ForeignKey(nameof(BrandId))]
         public Brand? Brand { get; set; }
+        public ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
     }
 
     public class Store : BaseModel
@@ -136,5 +137,21 @@ namespace ERP.Domain.Entities
         public string? AdminstratorId { get; set; }
         [ForeignKey(nameof(AdminstratorId))]
         public Employee? Adminstrator { get; set; }
+
+        public ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
     }
+
+    public class Stock
+    {
+        public int Id { get; set; }
+        public int Quantity { get; set; }
+        public int ProductId { get; set; }
+        [ForeignKey(nameof(ProductId))]
+        public Product? product { get; set; }
+
+        public int StoreId { get; set; }
+        [ForeignKey(nameof(StoreId))]
+        public Store? store { get; set; }
+    }
+
 }
