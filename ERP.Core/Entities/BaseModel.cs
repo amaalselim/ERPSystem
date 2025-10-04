@@ -24,4 +24,13 @@
         public string Seal { get; set; } = string.Empty;
 
     }
+
+    public class Branch : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Address { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
+        public string Email { get; set; } = string.Empty;
+        public bool IsMainBranch { get; set; }
+    }
 }
