@@ -35,11 +35,11 @@ namespace ERP.Domain.Entities
         public string PhoneNumber { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public bool IsMainBranch { get; set; }
-        public ICollection<Department> departments { get; set; } = new List<Department>();
-        public ICollection<Currency> Currencies { get; set; } = new List<Currency>();
-        public ICollection<Unit> Units { get; set; } = new List<Unit>();
-        public ICollection<Brand> Brands { get; set; } = new List<Brand>();
-        public ICollection<Store> Stores { get; set; } = new List<Store>();
+        public ICollection<Department>? departments { get; set; } = new List<Department>();
+        public ICollection<Currency>? Currencies { get; set; } = new List<Currency>();
+        public ICollection<Unit>? Units { get; set; } = new List<Unit>();
+        public ICollection<Brand>? Brands { get; set; } = new List<Brand>();
+        public ICollection<Store>? Stores { get; set; } = new List<Store>();
     }
 
     public class Department : BaseModel
@@ -48,7 +48,7 @@ namespace ERP.Domain.Entities
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
-        public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+        public ICollection<Employee>? Employees { get; set; } = new List<Employee>();
     }
 
     public class Employee : IdentityUser
@@ -62,7 +62,7 @@ namespace ERP.Domain.Entities
         public int DepartmentId { get; set; }
         [ForeignKey(nameof(DepartmentId))]
         public Department? Department { get; set; }
-        public ICollection<Store> Stores { get; set; } = new List<Store>();
+        public ICollection<Store>? Stores { get; set; } = new List<Store>();
     }
 
     public class Currency : BaseModel
@@ -82,7 +82,7 @@ namespace ERP.Domain.Entities
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Product>? Products { get; set; } = new List<Product>();
     }
 
     public class Brand : BaseModel
@@ -92,8 +92,8 @@ namespace ERP.Domain.Entities
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
-        public ICollection<Category> Categories { get; set; } = new List<Category>();
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Category>? Categories { get; set; } = new List<Category>();
+        public ICollection<Product>? Products { get; set; } = new List<Product>();
     }
 
     public class Category : BaseModel
@@ -102,7 +102,7 @@ namespace ERP.Domain.Entities
         public int BrandId { get; set; }
         [ForeignKey(nameof(BrandId))]
         public Brand? Brand { get; set; }
-        public ICollection<Product> Products { get; set; } = new List<Product>();
+        public ICollection<Product>? Products { get; set; } = new List<Product>();
     }
 
     public class Product : BaseModel
@@ -139,6 +139,17 @@ namespace ERP.Domain.Entities
         public Employee? Adminstrator { get; set; }
 
         public ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
+        public ICollection<StoreHistory>? StoreHistories { get; set; } = new List<StoreHistory>();
+    }
+
+    public class StoreHistory
+    {
+        public int Id { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow;
+        public string Event { get; set; } = string.Empty;
+        public int StoreId { get; set; }
+        [ForeignKey(nameof(StoreId))]
+        public Store? store { get; set; }
     }
 
     public class Stock
@@ -152,6 +163,15 @@ namespace ERP.Domain.Entities
         public int StoreId { get; set; }
         [ForeignKey(nameof(StoreId))]
         public Store? store { get; set; }
+        public ICollection<StockHistory>? StockHistories { get; set; } = new List<StockHistory>();
     }
-
+    public class StockHistory
+    {
+        public int Id { get; set; }
+        public DateTime Date { get; set; } = DateTime.UtcNow;
+        public string Event { get; set; } = string.Empty;
+        public int StockId { get; set; }
+        [ForeignKey(nameof(StockId))]
+        public Stock? Stock { get; set; }
+    }
 }
