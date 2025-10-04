@@ -38,6 +38,7 @@ namespace ERP.Domain.Entities
         public ICollection<Department> departments { get; set; } = new List<Department>();
         public ICollection<Currency> Currencies { get; set; } = new List<Currency>();
         public ICollection<Unit> Units { get; set; } = new List<Unit>();
+        public ICollection<Brand> Brands { get; set; } = new List<Brand>();
     }
 
     public class Department : BaseModel
@@ -76,6 +77,15 @@ namespace ERP.Domain.Entities
     {
         public string Name { get; set; } = string.Empty;
         public int Quantity { get; set; } = 1;
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+    }
+
+    public class Brand : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public string? ImgPath { get; set; }
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
