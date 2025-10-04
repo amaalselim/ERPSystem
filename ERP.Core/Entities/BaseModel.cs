@@ -34,7 +34,6 @@ namespace ERP.Domain.Entities
         public string Email { get; set; } = string.Empty;
         public bool IsMainBranch { get; set; }
         public ICollection<Department>? departments { get; set; } = new List<Department>();
-        public ICollection<Currency>? Currencies { get; set; } = new List<Currency>();
         public ICollection<Brand>? Brands { get; set; } = new List<Brand>();
         public ICollection<Store>? Stores { get; set; } = new List<Store>();
         public ICollection<Product>? Products { get; set; } = new List<Product>();
@@ -66,9 +65,11 @@ namespace ERP.Domain.Entities
         public bool IsUser { get; set; }
         public string? ImagePath { get; set; }
         public string? Signature { get; set; }
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
         [ForeignKey(nameof(DepartmentId))]
         public Department? Department { get; set; }
+
+        public int BranchId { get; set; }
         public ICollection<Store>? Stores { get; set; } = new List<Store>();
         public ICollection<StoreHistory> StoreHistories { get; set; } = new List<StoreHistory>();
         public ICollection<StockHistory> StockHistories { get; set; } = new List<StockHistory>();
@@ -77,8 +78,9 @@ namespace ERP.Domain.Entities
         public ICollection<PaymentVoucher>? PaymentVouchers { get; set; } = new List<PaymentVoucher>();
         public ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
     }
-    public class Payment_Method : BaseModel
+    public class PaymentMethod
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
         public ICollection<PurchaseInvoice>? PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
@@ -256,7 +258,7 @@ namespace ERP.Domain.Entities
 
         public int PaymentMethodId { get; set; }
         [ForeignKey(nameof(PaymentMethodId))]
-        public Payment_Method? PaymentMethod { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
         public ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
     }
     public class SaleInvoiceItem
@@ -303,7 +305,7 @@ namespace ERP.Domain.Entities
         public Employee? Employee { get; set; }
         public int PaymentMethodId { get; set; }
         [ForeignKey(nameof(PaymentMethodId))]
-        public Payment_Method? PaymentMethod { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
         public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
 
@@ -339,7 +341,7 @@ namespace ERP.Domain.Entities
 
         public int PaymentMethodId { get; set; }
         [ForeignKey(nameof(PaymentMethodId))]
-        public Payment_Method? PaymentMethod { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
 
         public int CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]
@@ -363,9 +365,10 @@ namespace ERP.Domain.Entities
 
         public int PaymentMethodId { get; set; }
         [ForeignKey(nameof(PaymentMethodId))]
-        public Payment_Method? PaymentMethod { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
 
         public int SupplierId { get; set; }
+
         [ForeignKey(nameof(SupplierId))]
         public Supplier? Supplier { get; set; }
 
