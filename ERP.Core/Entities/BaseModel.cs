@@ -45,6 +45,8 @@ namespace ERP.Domain.Entities
         public ICollection<Customer>? Customers { get; set; } = new List<Customer>();
         public ICollection<SaleInvoice>? saleInvoices { get; set; } = new List<SaleInvoice>();
         public ICollection<PurchaseInvoice>? purchaseInvoices { get; set; } = new List<PurchaseInvoice>();
+        public ICollection<PaymentVoucher>? PaymentVouchers { get; set; } = new List<PaymentVoucher>();
+        public ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
     }
 
     public class Department : BaseModel
@@ -72,12 +74,16 @@ namespace ERP.Domain.Entities
         public ICollection<StockHistory> StockHistories { get; set; } = new List<StockHistory>();
         public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
         public ICollection<PurchaseInvoice>? PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
+        public ICollection<PaymentVoucher>? PaymentVouchers { get; set; } = new List<PaymentVoucher>();
+        public ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
     }
     public class Payment_Method : BaseModel
     {
         public string Name { get; set; } = string.Empty;
         public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
         public ICollection<PurchaseInvoice>? PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
+        public ICollection<PaymentVoucher>? PaymentVouchers { get; set; } = new List<PaymentVoucher>();
+        public ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
     }
 
     public class Currency
@@ -133,6 +139,8 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
         public ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
+        public ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
+        public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
 
     public class Store
@@ -152,6 +160,8 @@ namespace ERP.Domain.Entities
 
         public ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
         public ICollection<StoreHistory>? StoreHistories { get; set; } = new List<StoreHistory>();
+        public ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
+        public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
 
     public class StoreHistory
@@ -203,6 +213,8 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
         public ICollection<PurchaseInvoice> purchaseInvoices = new List<PurchaseInvoice>();
+        public ICollection<PaymentVoucher> PaymentVouchers = new List<PaymentVoucher>();
+        public ICollection<ReceiptVoucher> receiptVouchers = new List<ReceiptVoucher>();
     }
 
     public class Customer : BaseModel
@@ -243,6 +255,25 @@ namespace ERP.Domain.Entities
         public int PaymentMethodId { get; set; }
         [ForeignKey(nameof(PaymentMethodId))]
         public Payment_Method? PaymentMethod { get; set; }
+        public ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
+    }
+    public class SaleInvoiceItem
+    {
+        public int Id { get; set; }
+        public int quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal Total { get; set; }
+        public int SaleInvoiceId { get; set; }
+        [ForeignKey(nameof(SaleInvoiceId))]
+        public SaleInvoice? SaleInvoice { get; set; }
+
+        public int ProductId { get; set; }
+        [ForeignKey(nameof(ProductId))]
+        public Product? Product { get; set; }
+
+        public int StoreId { get; set; }
+        [ForeignKey(nameof(StoreId))]
+        public Store? Store { get; set; }
     }
 
     public class PurchaseInvoice
@@ -271,7 +302,74 @@ namespace ERP.Domain.Entities
         public int PaymentMethodId { get; set; }
         [ForeignKey(nameof(PaymentMethodId))]
         public Payment_Method? PaymentMethod { get; set; }
+        public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
 
+    public class PurchaseInvoiceItem
+    {
+        public int Id { get; set; }
+        public int quantity { get; set; }
+        public decimal UnitPrice { get; set; }
+        public decimal Total { get; set; }
+        public int PurchaseInvoiceId { get; set; }
+        [ForeignKey(nameof(PurchaseInvoiceId))]
+        public PurchaseInvoice? PurchaseInvoice { get; set; }
+
+        public int ProductId { get; set; }
+        [ForeignKey(nameof(ProductId))]
+        public Product? Product { get; set; }
+
+        public int StoreId { get; set; }
+        [ForeignKey(nameof(StoreId))]
+        public Store? Store { get; set; }
+    }
+    public class ReceiptVoucher
+    {
+        public int Id { get; set; }
+        public decimal AmountPaid { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime SystemDate { get; set; } = DateTime.UtcNow;
+        public string? AttachmentPath { get; set; }
+
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+
+        public int PaymentMethodId { get; set; }
+        [ForeignKey(nameof(PaymentMethodId))]
+        public Payment_Method? PaymentMethod { get; set; }
+
+        public int CustomerId { get; set; }
+        [ForeignKey(nameof(CustomerId))]
+        public Customer? Customer { get; set; }
+
+        public string CreatedByUserId { get; set; } = string.Empty;
+        [ForeignKey(nameof(CreatedByUserId))]
+        public Employee? Employee { get; set; }
+    }
+    public class PaymentVoucher
+    {
+        public int Id { get; set; }
+        public decimal AmountPaid { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime SystemDate { get; set; } = DateTime.UtcNow;
+        public string? AttachmentPath { get; set; }
+
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+
+        public int PaymentMethodId { get; set; }
+        [ForeignKey(nameof(PaymentMethodId))]
+        public Payment_Method? PaymentMethod { get; set; }
+
+        public int SupplierId { get; set; }
+        [ForeignKey(nameof(SupplierId))]
+        public Supplier? Supplier { get; set; }
+
+        public string CreatedByUserId { get; set; } = string.Empty;
+        [ForeignKey(nameof(CreatedByUserId))]
+        public Employee? Employee { get; set; }
+    }
 
 }
