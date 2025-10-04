@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ERP.Domain.Entities
 {
@@ -43,5 +44,19 @@ namespace ERP.Domain.Entities
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
+        public ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    }
+
+    public class Employee : IdentityUser
+    {
+        public int UserId { get; set; }
+        public string FullName { get; set; } = null;
+        public bool IsActive { get; set; } = true;
+        public bool IsUser { get; set; }
+        public string? ImagePath { get; set; }
+        public string? Signature { get; set; }
+        public int DepartmentId { get; set; }
+        [ForeignKey(nameof(DepartmentId))]
+        public Department? Department { get; set; }
     }
 }
