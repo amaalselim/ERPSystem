@@ -1,4 +1,6 @@
-﻿namespace ERP.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ERP.Domain.Entities
 {
     public class BaseModel
     {
@@ -32,5 +34,14 @@
         public string PhoneNumber { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public bool IsMainBranch { get; set; }
+        public ICollection<Department> departments { get; set; } = new List<Department>();
+    }
+
+    public class Department : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
     }
 }
