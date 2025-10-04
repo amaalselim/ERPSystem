@@ -41,6 +41,10 @@ namespace ERP.Domain.Entities
         public int CurrencyId { get; set; }
         [ForeignKey(nameof(CurrencyId))]
         public Currency? Currency { get; set; }
+        public ICollection<Supplier>? Suppliers { get; set; } = new List<Supplier>();
+        public ICollection<Customer>? Customers { get; set; } = new List<Customer>();
+        public ICollection<SaleInvoice>? saleInvoices { get; set; } = new List<SaleInvoice>();
+        public ICollection<PurchaseInvoice>? purchaseInvoices { get; set; } = new List<PurchaseInvoice>();
     }
 
     public class Department : BaseModel
@@ -66,6 +70,14 @@ namespace ERP.Domain.Entities
         public ICollection<Store>? Stores { get; set; } = new List<Store>();
         public ICollection<StoreHistory> StoreHistories { get; set; } = new List<StoreHistory>();
         public ICollection<StockHistory> StockHistories { get; set; } = new List<StockHistory>();
+        public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
+        public ICollection<PurchaseInvoice>? PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
+    }
+    public class Payment_Method : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
+        public ICollection<PurchaseInvoice>? PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
     }
 
     public class Currency
@@ -180,4 +192,86 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(StockId))]
         public Stock? Stock { get; set; }
     }
+
+    public class Supplier : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public string? PhoneNumber { get; set; }
+        public string? Email { get; set; }
+        public decimal? FirstBalance { get; set; } = 0;
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+        public ICollection<PurchaseInvoice> purchaseInvoices = new List<PurchaseInvoice>();
+    }
+
+    public class Customer : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public string? PhoneNumber { get; set; }
+        public string? Email { get; set; }
+        public decimal? FirstBalance { get; set; } = 0;
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+        public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
+    }
+    public class SaleInvoice
+    {
+        public int Id { get; set; }
+        public string SaleInvoiceKey { get; set; } = string.Empty;
+        public DateTime SaleInvoiceDate { get; set; } = DateTime.UtcNow;
+        public DateTime SystemDate { get; set; } = DateTime.UtcNow;
+
+        public decimal BeforeDiscount { get; set; }
+        public decimal Discount { get; set; }
+        public decimal TotalAmount { get; set; }
+        public required string TotalWritten { get; set; }
+
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+
+        public int CustomerId { get; set; }
+        [ForeignKey(nameof(CustomerId))]
+        public Customer? Customer { get; set; }
+
+        public string EmployeeId { get; set; } = string.Empty;
+        [ForeignKey(nameof(EmployeeId))]
+        public Employee? Employee { get; set; }
+
+        public int PaymentMethodId { get; set; }
+        [ForeignKey(nameof(PaymentMethodId))]
+        public Payment_Method? PaymentMethod { get; set; }
+    }
+
+    public class PurchaseInvoice
+    {
+        public int Id { get; set; }
+        public string PurchaseInvoiceKey { get; set; } = string.Empty;
+        public DateTime PurchaseInvoiceDate { get; set; } = DateTime.UtcNow;
+        public DateTime SystemDate { get; set; } = DateTime.UtcNow;
+
+        public decimal BeforeDiscount { get; set; }
+        public decimal Discount { get; set; }
+        public decimal TotalAmount { get; set; }
+        public required string TotalWritten { get; set; }
+
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+
+        public int SupplierId { get; set; }
+        [ForeignKey(nameof(SupplierId))]
+        public Supplier? supplier { get; set; }
+
+        public string EmployeeId { get; set; } = string.Empty;
+        [ForeignKey(nameof(EmployeeId))]
+        public Employee? Employee { get; set; }
+        public int PaymentMethodId { get; set; }
+        [ForeignKey(nameof(PaymentMethodId))]
+        public Payment_Method? PaymentMethod { get; set; }
+    }
+
+
 }
