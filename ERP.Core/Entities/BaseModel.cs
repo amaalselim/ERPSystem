@@ -89,5 +89,14 @@ namespace ERP.Domain.Entities
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
+        public ICollection<Category> Categories { get; set; } = new List<Category>();
+    }
+
+    public class Category : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public int BrandId { get; set; }
+        [ForeignKey(nameof(BrandId))]
+        public Brand? Brand { get; set; }
     }
 }
