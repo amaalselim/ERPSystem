@@ -215,6 +215,7 @@ namespace ERP.Domain.Entities
         public ICollection<PurchaseInvoice> purchaseInvoices = new List<PurchaseInvoice>();
         public ICollection<PaymentVoucher> PaymentVouchers = new List<PaymentVoucher>();
         public ICollection<ReceiptVoucher> receiptVouchers = new List<ReceiptVoucher>();
+        public ICollection<SupplierAccount> SupplierAccounts = new List<SupplierAccount>();
     }
 
     public class Customer : BaseModel
@@ -227,6 +228,7 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
         public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
+        public ICollection<Customer> Customers { get; set; }
     }
     public class SaleInvoice
     {
@@ -370,6 +372,39 @@ namespace ERP.Domain.Entities
         public string CreatedByUserId { get; set; } = string.Empty;
         [ForeignKey(nameof(CreatedByUserId))]
         public Employee? Employee { get; set; }
+    }
+    public class CustomerAccount
+    {
+        public int Id { get; set; }
+        public int ItemId { get; set; }
+        public string Item { get; set; } = string.Empty;
+        public decimal? Creditor { get; set; }
+        public decimal? Debtor { get; set; }
+
+        public DateTime Date { get; set; }
+        public decimal Total { get; set; }
+
+        public int CustomerId { get; set; }
+        [ForeignKey(nameof(CustomerId))]
+        public Customer? Customer { get; set; }
+
+    }
+
+    public class SupplierAccount
+    {
+        public int Id { get; set; }
+        public int ItemId { get; set; }
+        public string Item { get; set; } = string.Empty;
+        public decimal? Creditor { get; set; }
+        public decimal? Debtor { get; set; }
+
+        public DateTime Date { get; set; }
+        public decimal Total { get; set; }
+
+        public int SupplierId { get; set; }
+        [ForeignKey(nameof(SupplierId))]
+        public Supplier? Supplier { get; set; }
+
     }
 
 }
