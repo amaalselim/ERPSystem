@@ -36,7 +36,7 @@ namespace ERP.Domain.Entities
         public ICollection<Department>? departments { get; set; } = new List<Department>();
         public ICollection<Currency>? Currencies { get; set; } = new List<Currency>();
         public ICollection<Brand>? Brands { get; set; } = new List<Brand>();
-        public ICollection<Store> Stores { get; set; } = new List<Store>();
+        public ICollection<Store>? Stores { get; set; } = new List<Store>();
         public ICollection<Product>? Products { get; set; } = new List<Product>();
         public int CurrencyId { get; set; }
         [ForeignKey(nameof(CurrencyId))]
@@ -63,7 +63,7 @@ namespace ERP.Domain.Entities
         public int DepartmentId { get; set; }
         [ForeignKey(nameof(DepartmentId))]
         public Department? Department { get; set; }
-        public ICollection<Store> Stores { get; set; } = new List<Store>();
+        public ICollection<Store>? Stores { get; set; } = new List<Store>();
         public ICollection<StoreHistory> StoreHistories { get; set; } = new List<StoreHistory>();
         public ICollection<StockHistory> StockHistories { get; set; } = new List<StockHistory>();
     }
