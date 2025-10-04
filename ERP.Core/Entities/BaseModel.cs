@@ -36,6 +36,7 @@ namespace ERP.Domain.Entities
         public string Email { get; set; } = string.Empty;
         public bool IsMainBranch { get; set; }
         public ICollection<Department> departments { get; set; } = new List<Department>();
+        public ICollection<Currency> Currencies { get; set; } = new List<Currency>();
     }
 
     public class Department : BaseModel
@@ -58,5 +59,17 @@ namespace ERP.Domain.Entities
         public int DepartmentId { get; set; }
         [ForeignKey(nameof(DepartmentId))]
         public Department? Department { get; set; }
+    }
+
+    public class Currency : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Code { get; set; } = "EGP";
+        public decimal ConcurrentCurrency { get; set; }
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+
+
     }
 }
