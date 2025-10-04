@@ -39,6 +39,7 @@ namespace ERP.Domain.Entities
         public ICollection<Currency> Currencies { get; set; } = new List<Currency>();
         public ICollection<Unit> Units { get; set; } = new List<Unit>();
         public ICollection<Brand> Brands { get; set; } = new List<Brand>();
+        public ICollection<Store> Stores { get; set; } = new List<Store>();
     }
 
     public class Department : BaseModel
@@ -61,6 +62,7 @@ namespace ERP.Domain.Entities
         public int DepartmentId { get; set; }
         [ForeignKey(nameof(DepartmentId))]
         public Department? Department { get; set; }
+        public ICollection<Store> Stores { get; set; } = new List<Store>();
     }
 
     public class Currency : BaseModel
@@ -80,6 +82,7 @@ namespace ERP.Domain.Entities
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 
     public class Brand : BaseModel
@@ -90,6 +93,7 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
         public ICollection<Category> Categories { get; set; } = new List<Category>();
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 
     public class Category : BaseModel
@@ -98,5 +102,39 @@ namespace ERP.Domain.Entities
         public int BrandId { get; set; }
         [ForeignKey(nameof(BrandId))]
         public Brand? Brand { get; set; }
+        public ICollection<Product> Products { get; set; } = new List<Product>();
+    }
+
+    public class Product : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public decimal Price { get; set; }
+
+        public int CategoryId { get; set; }
+        [ForeignKey(nameof(CategoryId))]
+        public Category? Category { get; set; }
+
+        public int UnitId { get; set; }
+        [ForeignKey(nameof(UnitId))]
+        public Unit? Unit { get; set; }
+
+        public int BrandId { get; set; }
+        [ForeignKey(nameof(BrandId))]
+        public Brand? Brand { get; set; }
+    }
+
+    public class Store : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
+        public string? Email { get; set; }
+        public string? Address { get; set; }
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+
+        public string? AdminstratorId { get; set; }
+        [ForeignKey(nameof(AdminstratorId))]
+        public Employee? Adminstrator { get; set; }
     }
 }
