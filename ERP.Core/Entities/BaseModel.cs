@@ -14,7 +14,6 @@ namespace ERP.Domain.Entities
     }
     public class Company : BaseModel
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Activity { get; set; } = string.Empty;
         public string TaxNumber { get; set; } = string.Empty;
@@ -25,7 +24,6 @@ namespace ERP.Domain.Entities
         public string Address { get; set; } = string.Empty;
         public string LogoPath { get; set; } = string.Empty;
         public string Seal { get; set; } = string.Empty;
-
     }
 
     public class Branch : BaseModel
@@ -37,9 +35,12 @@ namespace ERP.Domain.Entities
         public bool IsMainBranch { get; set; }
         public ICollection<Department>? departments { get; set; } = new List<Department>();
         public ICollection<Currency>? Currencies { get; set; } = new List<Currency>();
-        public ICollection<Unit>? Units { get; set; } = new List<Unit>();
         public ICollection<Brand>? Brands { get; set; } = new List<Brand>();
-        public ICollection<Store>? Stores { get; set; } = new List<Store>();
+        public ICollection<Store> Stores { get; set; } = new List<Store>();
+        public ICollection<Product>? Products { get; set; } = new List<Product>();
+        public int CurrencyId { get; set; }
+        [ForeignKey(nameof(CurrencyId))]
+        public Currency? Currency { get; set; }
     }
 
     public class Department : BaseModel
@@ -62,26 +63,25 @@ namespace ERP.Domain.Entities
         public int DepartmentId { get; set; }
         [ForeignKey(nameof(DepartmentId))]
         public Department? Department { get; set; }
-        public ICollection<Store>? Stores { get; set; } = new List<Store>();
+        public ICollection<Store> Stores { get; set; } = new List<Store>();
+        public ICollection<StoreHistory> StoreHistories { get; set; } = new List<StoreHistory>();
+        public ICollection<StockHistory> StockHistories { get; set; } = new List<StockHistory>();
     }
 
-    public class Currency : BaseModel
+    public class Currency
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Code { get; set; } = "EGP";
-        public decimal ConcurrentCurrency { get; set; }
-        public int BranchId { get; set; }
-        [ForeignKey(nameof(BranchId))]
-        public Branch? Branch { get; set; }
+        public bool IsActive { get; set; } = true;
+        public ICollection<Branch>? Branches { get; set; } = new List<Branch>();
 
     }
-    public class Unit : BaseModel
+    public class Unit
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public int Quantity { get; set; } = 1;
-        public int BranchId { get; set; }
-        [ForeignKey(nameof(BranchId))]
-        public Branch? Branch { get; set; }
         public ICollection<Product>? Products { get; set; } = new List<Product>();
     }
 
@@ -93,7 +93,6 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
         public ICollection<Category>? Categories { get; set; } = new List<Category>();
-        public ICollection<Product>? Products { get; set; } = new List<Product>();
     }
 
     public class Category : BaseModel
@@ -118,22 +117,23 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(UnitId))]
         public Unit? Unit { get; set; }
 
-        public int BrandId { get; set; }
-        [ForeignKey(nameof(BrandId))]
-        public Brand? Brand { get; set; }
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
         public ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
     }
 
-    public class Store : BaseModel
+    public class Store
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public string? Email { get; set; }
         public string? Address { get; set; }
+        public bool IsActive { get; set; } = true;
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
-
         public string? AdminstratorId { get; set; }
         [ForeignKey(nameof(AdminstratorId))]
         public Employee? Adminstrator { get; set; }
@@ -147,6 +147,9 @@ namespace ERP.Domain.Entities
         public int Id { get; set; }
         public DateTime Date { get; set; } = DateTime.UtcNow;
         public string Event { get; set; } = string.Empty;
+        public string CreatedByUserId { get; set; } = string.Empty;
+        [ForeignKey(nameof(CreatedByUserId))]
+        public Employee? Employee { get; set; }
         public int StoreId { get; set; }
         [ForeignKey(nameof(StoreId))]
         public Store? store { get; set; }
@@ -170,6 +173,9 @@ namespace ERP.Domain.Entities
         public int Id { get; set; }
         public DateTime Date { get; set; } = DateTime.UtcNow;
         public string Event { get; set; } = string.Empty;
+        public string CreatedByUserId { get; set; } = string.Empty;
+        [ForeignKey(nameof(CreatedByUserId))]
+        public Employee? Employee { get; set; }
         public int StockId { get; set; }
         [ForeignKey(nameof(StockId))]
         public Stock? Stock { get; set; }
