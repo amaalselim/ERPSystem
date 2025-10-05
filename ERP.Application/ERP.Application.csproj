@@ -10,8 +10,4 @@
     <ProjectReference Include="..\ERP.Core\ERP.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="IUnitOfWork\" />
-  </ItemGroup>
-
 </Project>
