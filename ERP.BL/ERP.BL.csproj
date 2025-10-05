@@ -10,8 +10,4 @@
     <ProjectReference Include="..\ERP.Infrastructure\ERP.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ServicesBL\" />
-  </ItemGroup>
-
 </Project>

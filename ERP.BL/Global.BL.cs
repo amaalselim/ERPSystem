@@ -1,0 +1,10 @@
+﻿global using ERP.Application.IUnitOfWork;
+global using ERP.BL.ServicesBL.IdentityBL;
+global using ERP.BL.ServicesBL.SeedingBL;
+global using ERP.Domain.Constants.GlobalConst;
+global using ERP.Domain.Entities.Seeding;
+global using Microsoft.AspNetCore.Identity;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using static ERP.Domain.Enums.EnumHelper;
