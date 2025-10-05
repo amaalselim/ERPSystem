@@ -7,21 +7,21 @@
             return await _context.Set<T>().AsNoTracking().CountAsync(match);
         }
 
-        public async Task<bool> DeleteAsync(T entity)
+        public Task<bool> DeleteAsync(T entity)
         {
-            if (entity is null) return false;
+            if (entity is null) return Task.FromResult(false);
             _context.Set<T>().Remove(entity);
-            return await _context.SaveChangesAsync() > 0;
+            return Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteRangeAsync(List<T> entities)
+        public Task<bool> DeleteRangeAsync(List<T> entities)
         {
             if (entities.Count() > 0)
             {
                 _context.Set<T>().RemoveRange(entities);
-                return await _context.SaveChangesAsync() > 0;
+                return Task.FromResult(true);
             }
-            return false;
+            return Task.FromResult(false);
         }
         public async Task<bool> ExistAsync(Expression<Func<T, bool>> match)
         {
@@ -53,21 +53,21 @@
             return _context.Set<T>().AsNoTracking().Where(match).Select(Selector);
         }
 
-        public async Task<bool> SaveAsync(T entity)
+        public Task<bool> SaveAsync(T entity)
         {
-            if (entity is null) return false;
+            if (entity is null) return Task.FromResult(false);
             _context.Set<T>().Add(entity);
-            return await _context.SaveChangesAsync() > 0;
+            return Task.FromResult(true);
         }
 
-        public async Task<bool> SaveRangeAsync(List<T> entities)
+        public Task<bool> SaveRangeAsync(List<T> entities)
         {
             if (entities.Count() > 0)
             {
                 _context.Set<T>().AddRange(entities);
-                return await _context.SaveChangesAsync() > 0;
+                return Task.FromResult(true);
             }
-            return false;
+            return Task.FromResult(false);
         }
 
         public async Task<decimal> SumAsync(Expression<Func<T, bool>> match, Expression<Func<T, decimal>> Selector)
@@ -75,21 +75,21 @@
             return await _context.Set<T>().AsNoTracking().Where(match).SumAsync(Selector);
         }
 
-        public async Task<bool> UpdateAsync(T entity)
+        public Task<bool> UpdateAsync(T entity)
         {
-            if (entity is null) return false;
+            if (entity is null) return Task.FromResult(false);
             _context.Entry(entity).State = EntityState.Modified;
-            return await _context.SaveChangesAsync() > 0;
+            return Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateRangeAsync(List<T> entities)
+        public Task<bool> UpdateRangeAsync(List<T> entities)
         {
             if (entities.Count() > 0)
             {
                 _context.Set<T>().UpdateRange(entities);
-                return await _context.SaveChangesAsync() > 0;
+                return Task.FromResult(true);
             }
-            return false;
+            return Task.FromResult(false);
         }
     }
 }
