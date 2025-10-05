@@ -1,6 +1,4 @@
-﻿using ERP.Domain.Entities.Seeding;
-
-namespace ERP.Infrastructure.Configurations.Seeding
+﻿namespace ERP.Infrastructure.Configurations.Seeding
 {
     internal class PaymentMethodConfiguration : IEntityTypeConfiguration<PaymentMethod>
     {
