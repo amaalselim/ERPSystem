@@ -18,38 +18,30 @@
 
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
-        public DbSet<Company> Companies { get; set; }
-        public DbSet<Branch> Branches { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-
-        public DbSet<CustomerAccount> CustomerAccounts { get; set; }
-        public DbSet<SupplierAccount> SupplierAccounts { get; set; }
-
-        public DbSet<PaymentMethod> PaymentMethods { get; set; }
-        public DbSet<Currency> Currencies { get; set; }
-        public DbSet<Unit> Units { get; set; }
-
-        public DbSet<PaymentVoucher> PaymentVouchers { get; set; }
-        public DbSet<ReceiptVoucher> ReceiptVouchers { get; set; }
-
-        public DbSet<Brand> Brands { get; set; }
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Stock> Stocks { get; set; }
-        public DbSet<Store> Stores { get; set; }
-        public DbSet<StoreHistory> StoreHistories { get; set; }
-        public DbSet<StockHistory> StockHistories { get; set; }
-
-        public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<PurchaseInvoice> PurchaseInvoices { get; set; }
-        public DbSet<PurchaseInvoiceItem> PurchaseInvoiceItems { get; set; }
-
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<SaleInvoice> SaleInvoices { get; set; }
-        public DbSet<SaleInvoiceItem> SaleInvoiceItems { get; set; }
-
-
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Branch> Branches { get; set; }
+        public virtual DbSet<Department> Departments { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<CustomerAccount> CustomerAccounts { get; set; }
+        public virtual DbSet<SupplierAccount> SupplierAccounts { get; set; }
+        public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public virtual DbSet<Currency> Currencies { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
+        public virtual DbSet<PaymentVoucher> PaymentVouchers { get; set; }
+        public virtual DbSet<ReceiptVoucher> ReceiptVouchers { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Stock> Stocks { get; set; }
+        public virtual DbSet<Store> Stores { get; set; }
+        public virtual DbSet<StoreHistory> StoreHistories { get; set; }
+        public virtual DbSet<StockHistory> StockHistories { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<PurchaseInvoice> PurchaseInvoices { get; set; }
+        public virtual DbSet<PurchaseInvoiceItem> PurchaseInvoiceItems { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<SaleInvoice> SaleInvoices { get; set; }
+        public virtual DbSet<SaleInvoiceItem> SaleInvoiceItems { get; set; }
 
     }
 }
