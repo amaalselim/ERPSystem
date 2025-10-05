@@ -1,4 +1,5 @@
-﻿namespace ERP.Infrastructure.Data
+﻿
+namespace ERP.Infrastructure.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {

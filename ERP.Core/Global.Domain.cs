@@ -6,9 +6,8 @@ global using ERP.Domain.Entities.Inventory;
 global using ERP.Domain.Entities.Purchasing;
 global using ERP.Domain.Entities.Sales;
 global using ERP.Domain.Entities.Seeding;
-global using Microsoft.AspNet.Identity.EntityFramework;
+global using Microsoft.AspNetCore.Identity;
 global using System.ComponentModel.DataAnnotations.Schema;
-
 
 
 
