@@ -6,13 +6,11 @@
         public int Quantity { get; set; }
         public int ProductId { get; set; }
         [ForeignKey(nameof(ProductId))]
-        public Product? product { get; set; }
+        public virtual Product? product { get; set; }
 
         public int StoreId { get; set; }
         [ForeignKey(nameof(StoreId))]
-        public Store? store { get; set; }
-        public ICollection<StockHistory>? StockHistories { get; set; } = new List<StockHistory>();
+        public virtual Store? store { get; set; }
+        public virtual ICollection<StockHistory>? StockHistories { get; set; } = new List<StockHistory>();
     }
-    // End Accounting
-
 }

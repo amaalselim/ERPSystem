@@ -10,16 +10,14 @@
         public bool IsActive { get; set; } = true;
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
-        public Branch? Branch { get; set; }
+        public virtual Branch? Branch { get; set; }
         public string? AdminstratorId { get; set; }
         [ForeignKey(nameof(AdminstratorId))]
-        public Employee? Adminstrator { get; set; }
+        public virtual Employee? Adminstrator { get; set; }
 
-        public ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
-        public ICollection<StoreHistory>? StoreHistories { get; set; } = new List<StoreHistory>();
-        public ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
-        public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
+        public virtual ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
+        public virtual ICollection<StoreHistory>? StoreHistories { get; set; } = new List<StoreHistory>();
+        public virtual ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
+        public virtual ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
-    // End Accounting
-
 }

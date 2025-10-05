@@ -10,20 +10,18 @@
 
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
-        public Branch? Branch { get; set; }
+        public virtual Branch? Branch { get; set; }
 
         public int PaymentMethodId { get; set; }
         [ForeignKey(nameof(PaymentMethodId))]
-        public PaymentMethod? PaymentMethod { get; set; }
+        public virtual PaymentMethod? PaymentMethod { get; set; }
 
         public int CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]
-        public Customer? Customer { get; set; }
+        public virtual Customer? Customer { get; set; }
 
         public string CreatedByUserId { get; set; } = string.Empty;
         [ForeignKey(nameof(CreatedByUserId))]
-        public Employee? Employee { get; set; }
+        public virtual Employee? Employee { get; set; }
     }
-    // End Accounting
-
 }

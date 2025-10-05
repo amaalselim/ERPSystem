@@ -13,9 +13,7 @@
 
         public int CustomerId { get; set; }
         [ForeignKey(nameof(CustomerId))]
-        public Customer? Customer { get; set; }
+        public virtual Customer? Customer { get; set; }
 
     }
-    // End Accounting
-
 }

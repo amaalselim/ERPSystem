@@ -9,10 +9,8 @@
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
-        public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
-        public ICollection<CustomerAccount> CustomerAccounts { get; set; }
-        public ICollection<ReceiptVoucher> ReceiptVouchers = new List<ReceiptVoucher>();
+        public virtual ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
+        public virtual ICollection<CustomerAccount>? CustomerAccounts { get; set; } = new List<CustomerAccount>();
+        public virtual ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
     }
-    // End Accounting
-
 }

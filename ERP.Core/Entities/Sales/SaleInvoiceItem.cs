@@ -8,16 +8,14 @@
         public decimal Total { get; set; }
         public int SaleInvoiceId { get; set; }
         [ForeignKey(nameof(SaleInvoiceId))]
-        public SaleInvoice? SaleInvoice { get; set; }
+        public virtual SaleInvoice? SaleInvoice { get; set; }
 
         public int ProductId { get; set; }
         [ForeignKey(nameof(ProductId))]
-        public Product? Product { get; set; }
+        public virtual Product? Product { get; set; }
 
         public int StoreId { get; set; }
         [ForeignKey(nameof(StoreId))]
-        public Store? Store { get; set; }
+        public virtual Store? Store { get; set; }
     }
-    // End Accounting
-
 }

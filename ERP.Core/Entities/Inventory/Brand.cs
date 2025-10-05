@@ -6,9 +6,8 @@
         public string? ImgPath { get; set; }
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
-        public Branch? Branch { get; set; }
-        public ICollection<Category>? Categories { get; set; } = new List<Category>();
+        public virtual Branch? Branch { get; set; }
+        public virtual ICollection<Category>? Categories { get; set; } = new List<Category>();
     }
-    // End Accounting
 
 }

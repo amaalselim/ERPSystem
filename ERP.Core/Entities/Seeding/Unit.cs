@@ -5,8 +5,6 @@
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public int Quantity { get; set; } = 1;
-        public ICollection<Product>? Products { get; set; } = new List<Product>();
+        public virtual ICollection<Product>? Products { get; set; } = new List<Product>();
     }
-    // End Accounting
-
 }

@@ -6,9 +6,6 @@
         public string Name { get; set; } = string.Empty;
         public string Code { get; set; }
         public bool IsActive { get; set; }
-        public ICollection<Branch>? Branches { get; set; } = new List<Branch>();
-
+        public virtual ICollection<Branch>? Branches { get; set; } = new List<Branch>();
     }
-    // End Accounting
-
 }

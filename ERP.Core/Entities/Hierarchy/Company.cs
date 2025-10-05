@@ -14,6 +14,4 @@
         public string LogoPath { get; set; } = string.Empty;
         public string Seal { get; set; } = string.Empty;
     }
-    // End Accounting
-
 }

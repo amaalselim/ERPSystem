@@ -13,7 +13,7 @@
 
         public int SupplierId { get; set; }
         [ForeignKey(nameof(SupplierId))]
-        public Supplier? Supplier { get; set; }
+        public virtual Supplier? Supplier { get; set; }
 
     }
     // End Accounting

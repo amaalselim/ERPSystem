@@ -14,20 +14,18 @@
 
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
-        public Branch? Branch { get; set; }
+        public virtual Branch? Branch { get; set; }
 
         public int SupplierId { get; set; }
         [ForeignKey(nameof(SupplierId))]
-        public Supplier? supplier { get; set; }
+        public virtual Supplier? supplier { get; set; }
 
         public string EmployeeId { get; set; } = string.Empty;
         [ForeignKey(nameof(EmployeeId))]
-        public Employee? Employee { get; set; }
+        public virtual Employee? Employee { get; set; }
         public int PaymentMethodId { get; set; }
         [ForeignKey(nameof(PaymentMethodId))]
-        public PaymentMethod? PaymentMethod { get; set; }
-        public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
+        public virtual PaymentMethod? PaymentMethod { get; set; }
+        public virtual ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
-    // End Accounting
-
 }

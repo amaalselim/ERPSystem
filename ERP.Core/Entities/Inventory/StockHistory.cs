@@ -7,11 +7,9 @@
         public string Event { get; set; } = string.Empty;
         public string CreatedByUserId { get; set; } = string.Empty;
         [ForeignKey(nameof(CreatedByUserId))]
-        public Employee? Employee { get; set; }
+        public virtual Employee? Employee { get; set; }
         public int StockId { get; set; }
         [ForeignKey(nameof(StockId))]
-        public Stock? Stock { get; set; }
+        public virtual Stock? Stock { get; set; }
     }
-    // End Accounting
-
 }

@@ -7,19 +7,17 @@
 
         public int CategoryId { get; set; }
         [ForeignKey(nameof(CategoryId))]
-        public Category? Category { get; set; }
+        public virtual Category? Category { get; set; }
 
         public int UnitId { get; set; }
         [ForeignKey(nameof(UnitId))]
-        public Unit? Unit { get; set; }
+        public virtual Unit? Unit { get; set; }
 
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
-        public Branch? Branch { get; set; }
-        public ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
-        public ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
-        public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
+        public virtual Branch? Branch { get; set; }
+        public virtual ICollection<Stock>? Stocks { get; set; } = new List<Stock>();
+        public virtual ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
+        public virtual ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
-    // End Accounting
-
 }

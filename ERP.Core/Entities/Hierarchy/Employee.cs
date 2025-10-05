@@ -10,17 +10,15 @@
         public string? Signature { get; set; }
         public int? DepartmentId { get; set; }
         [ForeignKey(nameof(DepartmentId))]
-        public Department? Department { get; set; }
+        public virtual Department? Department { get; set; }
 
         public int BranchId { get; set; }
-        public ICollection<Store>? Stores { get; set; } = new List<Store>();
-        public ICollection<StoreHistory> StoreHistories { get; set; } = new List<StoreHistory>();
-        public ICollection<StockHistory> StockHistories { get; set; } = new List<StockHistory>();
-        public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
-        public ICollection<PurchaseInvoice>? PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
-        public ICollection<PaymentVoucher>? PaymentVouchers { get; set; } = new List<PaymentVoucher>();
-        public ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
+        public virtual ICollection<Store>? Stores { get; set; } = new List<Store>();
+        public virtual ICollection<StoreHistory> StoreHistories { get; set; } = new List<StoreHistory>();
+        public virtual ICollection<StockHistory> StockHistories { get; set; } = new List<StockHistory>();
+        public virtual ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
+        public virtual ICollection<PurchaseInvoice>? PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
+        public virtual ICollection<PaymentVoucher>? PaymentVouchers { get; set; } = new List<PaymentVoucher>();
+        public virtual ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
     }
-    // End Accounting
-
 }
