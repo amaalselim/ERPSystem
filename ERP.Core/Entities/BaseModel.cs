@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ERP.Domain.Entities
+﻿namespace ERP.Domain.Entities
 {
     public class BaseModel
     {
