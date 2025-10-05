@@ -1,5 +1,4 @@
-﻿
-namespace ERP.Web.DependencyInjection
+﻿namespace ERP.Web.DependencyInjection
 {
     public static class DependencyInjection
     {
@@ -11,6 +10,8 @@ namespace ERP.Web.DependencyInjection
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseLazyLoadingProxies().UseSqlServer(connectionString));
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;
         }
