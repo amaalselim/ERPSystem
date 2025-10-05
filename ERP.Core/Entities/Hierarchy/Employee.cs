@@ -1,4 +1,5 @@
-﻿namespace ERP.Domain.Entities.Hierarchy
+﻿
+namespace ERP.Domain.Entities.Hierarchy
 {
     public class Employee : IdentityUser
     {

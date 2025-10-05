@@ -5,7 +5,7 @@
         public string Name { get; set; } = string.Empty;
         public string? PhoneNumber { get; set; }
         public string? Email { get; set; }
-        public decimal? FirstBalance { get; set; } = 0;
+        public decimal FirstBalance { get; set; }
         public int BranchId { get; set; }
         [ForeignKey(nameof(BranchId))]
         public virtual Branch? Branch { get; set; }
