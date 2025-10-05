@@ -1,4 +1,6 @@
-﻿namespace ERP.Infrastructure.Configurations.Accounting
+﻿using ERP.Domain.Entities.Accounting;
+
+namespace ERP.Infrastructure.Configurations.Accounting
 {
     internal class CustomerAccountConfiguration : IEntityTypeConfiguration<CustomerAccount>
     {

@@ -1,4 +1,6 @@
-﻿namespace ERP.Infrastructure.Configurations.Sales
+﻿using ERP.Domain.Entities.Sales;
+
+namespace ERP.Infrastructure.Configurations.Sales
 {
     internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {

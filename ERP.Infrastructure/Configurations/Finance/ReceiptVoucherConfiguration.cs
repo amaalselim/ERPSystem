@@ -1,4 +1,6 @@
-﻿namespace ERP.Infrastructure.Configurations.Finance
+﻿using ERP.Domain.Entities.Finance;
+
+namespace ERP.Infrastructure.Configurations.Finance
 {
     internal class ReceiptVoucherConfiguration : IEntityTypeConfiguration<ReceiptVoucher>
     {

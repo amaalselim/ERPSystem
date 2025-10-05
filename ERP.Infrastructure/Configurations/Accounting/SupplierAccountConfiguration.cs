@@ -1,4 +1,6 @@
 ﻿
+using ERP.Domain.Entities.Accounting;
+
 namespace ERP.Infrastructure.Configurations.Accounting
 {
     internal class SupplierAccountConfiguration : IEntityTypeConfiguration<SupplierAccount>

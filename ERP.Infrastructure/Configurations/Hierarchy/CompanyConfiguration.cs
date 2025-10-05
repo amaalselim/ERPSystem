@@ -1,4 +1,6 @@
 ﻿
+using ERP.Domain.Entities.Hierarchy;
+
 namespace ERP.Infrastructure.Configurations.Hierarchy
 {
     internal class CompanyConfiguration : IEntityTypeConfiguration<Company>

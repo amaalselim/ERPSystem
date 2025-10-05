@@ -1,4 +1,6 @@
-﻿namespace ERP.Infrastructure.Configurations.Seeding
+﻿using ERP.Domain.Entities.Seeding;
+
+namespace ERP.Infrastructure.Configurations.Seeding
 {
     internal class UnitConfiguration : IEntityTypeConfiguration<Unit>
     {

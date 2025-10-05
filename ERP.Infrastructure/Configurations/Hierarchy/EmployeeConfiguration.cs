@@ -1,4 +1,6 @@
-﻿namespace ERP.Infrastructure.Configurations.Hierarchy
+﻿using ERP.Domain.Entities.Hierarchy;
+
+namespace ERP.Infrastructure.Configurations.Hierarchy
 {
     internal class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
     {

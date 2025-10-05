@@ -1,4 +1,6 @@
-﻿namespace ERP.Infrastructure.Configurations.Inventory
+﻿using ERP.Domain.Entities.Inventory;
+
+namespace ERP.Infrastructure.Configurations.Inventory
 {
     internal class StockConfiguration : IEntityTypeConfiguration<Stock>
     {

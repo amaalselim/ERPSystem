@@ -1,4 +1,6 @@
-﻿namespace ERP.Infrastructure.Configurations.Purchasing
+﻿using ERP.Domain.Entities.Purchasing;
+
+namespace ERP.Infrastructure.Configurations.Purchasing
 {
     internal class SupplierConfiguration : IEntityTypeConfiguration<Supplier>
     {
