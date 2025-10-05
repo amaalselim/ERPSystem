@@ -1,6 +1,4 @@
-﻿using ERP.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
-
+﻿
 namespace ERP.Web.DependencyInjection
 {
     public static class DependencyInjection
