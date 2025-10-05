@@ -12,6 +12,8 @@ namespace ERP.Domain.Entities
         public string? UpdatedByUserId { get; set; }
         public bool IsActive { get; set; } = true;
     }
+
+    // Start Hierarchy
     public class Company : BaseModel
     {
         public string Name { get; set; } = string.Empty;
@@ -25,7 +27,6 @@ namespace ERP.Domain.Entities
         public string LogoPath { get; set; } = string.Empty;
         public string Seal { get; set; } = string.Empty;
     }
-
     public class Branch : BaseModel
     {
         public string Name { get; set; } = string.Empty;
@@ -47,7 +48,6 @@ namespace ERP.Domain.Entities
         public ICollection<PaymentVoucher>? PaymentVouchers { get; set; } = new List<PaymentVoucher>();
         public ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
     }
-
     public class Department : BaseModel
     {
         public string Name { get; set; } = string.Empty;
@@ -56,7 +56,6 @@ namespace ERP.Domain.Entities
         public Branch? Branch { get; set; }
         public ICollection<Employee>? Employees { get; set; } = new List<Employee>();
     }
-
     public class Employee : IdentityUser
     {
         public int UserId { get; set; }
@@ -78,6 +77,9 @@ namespace ERP.Domain.Entities
         public ICollection<PaymentVoucher>? PaymentVouchers { get; set; } = new List<PaymentVoucher>();
         public ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
     }
+    // End Hierarchy
+
+    //start Seeding
     public class PaymentMethod
     {
         public int Id { get; set; }
@@ -87,13 +89,12 @@ namespace ERP.Domain.Entities
         public ICollection<PaymentVoucher>? PaymentVouchers { get; set; } = new List<PaymentVoucher>();
         public ICollection<ReceiptVoucher>? ReceiptVouchers { get; set; } = new List<ReceiptVoucher>();
     }
-
     public class Currency
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public string Code { get; set; } = "EGP";
-        public bool IsActive { get; set; } = true;
+        public string Code { get; set; }
+        public bool IsActive { get; set; }
         public ICollection<Branch>? Branches { get; set; } = new List<Branch>();
 
     }
@@ -104,7 +105,9 @@ namespace ERP.Domain.Entities
         public int Quantity { get; set; } = 1;
         public ICollection<Product>? Products { get; set; } = new List<Product>();
     }
+    //end Seeding
 
+    // Start Inventory
     public class Brand : BaseModel
     {
         public string Name { get; set; } = string.Empty;
@@ -114,7 +117,6 @@ namespace ERP.Domain.Entities
         public Branch? Branch { get; set; }
         public ICollection<Category>? Categories { get; set; } = new List<Category>();
     }
-
     public class Category : BaseModel
     {
         public string Name { get; set; } = string.Empty;
@@ -123,7 +125,6 @@ namespace ERP.Domain.Entities
         public Brand? Brand { get; set; }
         public ICollection<Product>? Products { get; set; } = new List<Product>();
     }
-
     public class Product : BaseModel
     {
         public string Name { get; set; } = string.Empty;
@@ -144,7 +145,6 @@ namespace ERP.Domain.Entities
         public ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
         public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
-
     public class Store
     {
         public int Id { get; set; }
@@ -165,7 +165,6 @@ namespace ERP.Domain.Entities
         public ICollection<SaleInvoiceItem>? SaleInvoiceItems { get; set; } = new List<SaleInvoiceItem>();
         public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
-
     public class StoreHistory
     {
         public int Id { get; set; }
@@ -176,9 +175,8 @@ namespace ERP.Domain.Entities
         public Employee? Employee { get; set; }
         public int StoreId { get; set; }
         [ForeignKey(nameof(StoreId))]
-        public Store? store { get; set; }
+        public Store? Store { get; set; }
     }
-
     public class Stock
     {
         public int Id { get; set; }
@@ -204,22 +202,9 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(StockId))]
         public Stock? Stock { get; set; }
     }
+    // End Inventory
 
-    public class Supplier : BaseModel
-    {
-        public string Name { get; set; } = string.Empty;
-        public string? PhoneNumber { get; set; }
-        public string? Email { get; set; }
-        public decimal? FirstBalance { get; set; } = 0;
-        public int BranchId { get; set; }
-        [ForeignKey(nameof(BranchId))]
-        public Branch? Branch { get; set; }
-        public ICollection<PurchaseInvoice> purchaseInvoices = new List<PurchaseInvoice>();
-        public ICollection<PaymentVoucher> PaymentVouchers = new List<PaymentVoucher>();
-        public ICollection<ReceiptVoucher> receiptVouchers = new List<ReceiptVoucher>();
-        public ICollection<SupplierAccount> SupplierAccounts = new List<SupplierAccount>();
-    }
-
+    //start Sales
     public class Customer : BaseModel
     {
         public string Name { get; set; } = string.Empty;
@@ -230,7 +215,8 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(BranchId))]
         public Branch? Branch { get; set; }
         public ICollection<SaleInvoice>? SaleInvoices { get; set; } = new List<SaleInvoice>();
-        public ICollection<Customer> Customers { get; set; }
+        public ICollection<CustomerAccount> CustomerAccounts { get; set; }
+        public ICollection<ReceiptVoucher> ReceiptVouchers = new List<ReceiptVoucher>();
     }
     public class SaleInvoice
     {
@@ -279,7 +265,22 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(StoreId))]
         public Store? Store { get; set; }
     }
+    // End Sales
 
+    // Start Purchasing
+    public class Supplier : BaseModel
+    {
+        public string Name { get; set; } = string.Empty;
+        public string? PhoneNumber { get; set; }
+        public string? Email { get; set; }
+        public decimal? FirstBalance { get; set; } = 0;
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+        public ICollection<PurchaseInvoice> purchaseInvoices = new List<PurchaseInvoice>();
+        public ICollection<PaymentVoucher> PaymentVouchers = new List<PaymentVoucher>();
+        public ICollection<SupplierAccount> SupplierAccounts = new List<SupplierAccount>();
+    }
     public class PurchaseInvoice
     {
         public int Id { get; set; }
@@ -308,7 +309,6 @@ namespace ERP.Domain.Entities
         public PaymentMethod? PaymentMethod { get; set; }
         public ICollection<PurchaseInvoiceItem>? PurchaseInvoiceItems { get; set; } = new List<PurchaseInvoiceItem>();
     }
-
     public class PurchaseInvoiceItem
     {
         public int Id { get; set; }
@@ -327,30 +327,9 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(StoreId))]
         public Store? Store { get; set; }
     }
-    public class ReceiptVoucher
-    {
-        public int Id { get; set; }
-        public decimal AmountPaid { get; set; }
-        public DateTime Date { get; set; }
-        public DateTime SystemDate { get; set; } = DateTime.UtcNow;
-        public string? AttachmentPath { get; set; }
+    // End Purchasing
 
-        public int BranchId { get; set; }
-        [ForeignKey(nameof(BranchId))]
-        public Branch? Branch { get; set; }
-
-        public int PaymentMethodId { get; set; }
-        [ForeignKey(nameof(PaymentMethodId))]
-        public PaymentMethod? PaymentMethod { get; set; }
-
-        public int CustomerId { get; set; }
-        [ForeignKey(nameof(CustomerId))]
-        public Customer? Customer { get; set; }
-
-        public string CreatedByUserId { get; set; } = string.Empty;
-        [ForeignKey(nameof(CreatedByUserId))]
-        public Employee? Employee { get; set; }
-    }
+    // Start Finance
     public class PaymentVoucher
     {
         public int Id { get; set; }
@@ -376,13 +355,40 @@ namespace ERP.Domain.Entities
         [ForeignKey(nameof(CreatedByUserId))]
         public Employee? Employee { get; set; }
     }
+    public class ReceiptVoucher
+    {
+        public int Id { get; set; }
+        public decimal AmountPaid { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime SystemDate { get; set; } = DateTime.UtcNow;
+        public string? AttachmentPath { get; set; }
+
+        public int BranchId { get; set; }
+        [ForeignKey(nameof(BranchId))]
+        public Branch? Branch { get; set; }
+
+        public int PaymentMethodId { get; set; }
+        [ForeignKey(nameof(PaymentMethodId))]
+        public PaymentMethod? PaymentMethod { get; set; }
+
+        public int CustomerId { get; set; }
+        [ForeignKey(nameof(CustomerId))]
+        public Customer? Customer { get; set; }
+
+        public string CreatedByUserId { get; set; } = string.Empty;
+        [ForeignKey(nameof(CreatedByUserId))]
+        public Employee? Employee { get; set; }
+    }
+    //end Finance
+
+    // Start Accounting
     public class CustomerAccount
     {
         public int Id { get; set; }
         public int ItemId { get; set; }
         public string Item { get; set; } = string.Empty;
-        public decimal? Creditor { get; set; }
-        public decimal? Debtor { get; set; }
+        public decimal Creditor { get; set; }
+        public decimal Debtor { get; set; }
 
         public DateTime Date { get; set; }
         public decimal Total { get; set; }
@@ -392,14 +398,13 @@ namespace ERP.Domain.Entities
         public Customer? Customer { get; set; }
 
     }
-
     public class SupplierAccount
     {
         public int Id { get; set; }
         public int ItemId { get; set; }
         public string Item { get; set; } = string.Empty;
-        public decimal? Creditor { get; set; }
-        public decimal? Debtor { get; set; }
+        public decimal Creditor { get; set; }
+        public decimal Debtor { get; set; }
 
         public DateTime Date { get; set; }
         public decimal Total { get; set; }
@@ -409,5 +414,6 @@ namespace ERP.Domain.Entities
         public Supplier? Supplier { get; set; }
 
     }
+    // End Accounting
 
 }
