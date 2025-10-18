@@ -9,34 +9,32 @@ namespace ERP.BL.ServicesBL.InventoryBL
     {
         public async Task<ProductFilterVM> PrepareModel()
         {
-            var categories = await _unitOfWork.Repository<Category>().GetAllAsync(c => true);
-            var branches = await _unitOfWork.Repository<Branch>().GetAllAsync(b => true);
-            var units = await _unitOfWork.Repository<Unit>().GetAllAsync(u => true);
+            var categories = await _unitOfWork.Repository<Category>().GetAllQueryable(c => true)
+                .Select(c => new SelectListItem
+                {
+                    Text = c.Name,
+                    Value = c.Id.ToString()
+                }).ToListAsync();
 
+            var branches = await _unitOfWork.Repository<Branch>().GetAllQueryable(b => true)
+                .Select(b => new SelectListItem
+                {
+                    Text = b.Name,
+                    Value = b.Id.ToString()
+                }).ToListAsync();
 
-            var categoryList = categories.Select(c => new SelectListItem
-            {
-                Text = c.Name,
-                Value = c.Id.ToString()
-            }).ToList();
-
-            var branchList = branches.Select(b => new SelectListItem
-            {
-                Text = b.Name,
-                Value = b.Id.ToString()
-            }).ToList();
-
-            var unitList = units.Select(u => new SelectListItem
-            {
-                Text = u.Name,
-                Value = u.Id.ToString()
-            }).ToList();
+            var units = await _unitOfWork.Repository<Unit>().GetAllQueryable(u => true)
+                .Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                }).ToListAsync();
 
             var model = new ProductFilterVM
             {
-                Categories = categoryList,
-                Branches = branchList,
-                Units = unitList
+                Categories = categories,
+                Branches = branches,
+                Units = units
             };
             return model;
         }
