@@ -1,0 +1,34 @@
+architecture:mix between clean,union
+3 layers:
+core:
+1-domain
+--constants folder:
+global constants اي لينك اي باسورد اي كونست حاجه ثابتهfolder 
+2-Dtos
+Areas
+مجموعه من dtos لازم كله يكون في فولدر خاص بيه
+3-entities
+فولدرات فيها اللي مع بعضه
+4-enums-> enum helper
+5-global core=> فيها كل ال using 
+
+2-application:
+1-interfaces=>generic
+2-IUnitOfwork=>generic
+---------------------------------------------------------------------
+infrastructure:
+1-configuration
+2-data=>context
+3-extenstions=>upload image مثلا
+4-handlers
+5-migration
+6-services=>generic
+7-unit of work
+8-view models تحته فولدر ب اسم الكونترولرررز
+9-global contain using
+---------------------------
+business logic: بنحط فيها كل حاجه الكونترولرر بينده ع البيزنس لوجيك
+seeding=>roles,permissions
+---------------------------------
+
+

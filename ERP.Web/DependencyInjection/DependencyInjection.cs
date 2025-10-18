@@ -1,4 +1,7 @@
-﻿namespace ERP.Web.DependencyInjection
+﻿using ERP.BL.ServicesBL.InventoryBL;
+using Microsoft.AspNetCore.Identity;
+
+namespace ERP.Web.DependencyInjection
 {
     public static class DependencyInjection
     {
@@ -11,11 +14,18 @@
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseLazyLoadingProxies().UseSqlServer(connectionString));
 
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<RolesSeedServicesBL>();
             builder.Services.AddScoped<UnitsSeedServicesBL>();
             builder.Services.AddScoped<CurrenciesSeedServicesBL>();
             builder.Services.AddScoped<PaymentMehodsSeedServicesBL>();
+
+            builder.Services.AddScoped<ProductsServicesBL>();
 
             //Seeding
             builder.Services.AddScoped<DefaultRoles>();

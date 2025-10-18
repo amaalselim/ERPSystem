@@ -30,7 +30,8 @@
 
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> match)
         {
-            return await _context.Set<T>().AsNoTracking().Where(match).ToListAsync();
+            return await _context.Set<T>().AsNoTracking()
+                .Where(match).ToListAsync();
         }
 
         public IQueryable<T> GetAllQueryable(Expression<Func<T, bool>> match)
